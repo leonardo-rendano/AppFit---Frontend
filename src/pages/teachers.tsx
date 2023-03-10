@@ -1,11 +1,10 @@
 import { InputText } from "@/components/InputText";
+import { Title } from "@/components/Title";
 
 export default function TeachersPage() {
   return (
     <div className="w-5/6 m-auto mt-20">
-      <div className="py-4">
-        <h1 className=" text-2xl">Professores</h1>
-      </div>
+      <Title text="Professores" />
 
       <div className=" mt-10 sm:mt-0 ">
         <div className="md:grid md:grid-cols-2 md:gap-6">
