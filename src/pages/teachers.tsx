@@ -2,7 +2,9 @@ import { ButtonArea } from "@/components/ButtonArea";
 import { Container } from "@/components/Container";
 import { ContentContainer } from "@/components/ContentContainer";
 import { Form } from "@/components/Form";
+import { FormInputArea } from "@/components/FormInputArea";
 import { InputText } from "@/components/InputText";
+import { SelectInput } from "@/components/SelectInput";
 import { SubmitButton } from "@/components/SubmitButton";
 import { Title } from "@/components/Title";
 
@@ -12,42 +14,41 @@ export default function TeachersPage() {
       <Title text="Professores" />
 
       <ContentContainer>
-        <Form onSubmit={() => { }}>
-          <InputText
-            name="nome"
-            id="nome"
-            label="Nome"
-            htmlFor="nome"
-          />
+        <Form onSubmit={() => {}}>
+          <FormInputArea>
+            <InputText
+              name="nome"
+              id="nome"
+              label="Nome"
+              htmlFor="nome"
+            />
 
-          <InputText
-            name="registro"
-            id="registro"
-            label="Registro"
-            htmlFor="registro"
-          />
+            <InputText
+              name="registro"
+              id="registro"
+              label="Registro"
+              htmlFor="registro"
+            />
 
-          <InputText
-            name="cpf"
-            id="cpf"
-            label="CPF"
-            htmlFor="cpf"
-          />
+            <InputText
+              name="cpf"
+              id="cpf"
+              label="CPF"
+              htmlFor="cpf"
+            />
 
-          <div className="col-span-6 sm:col-span-3">
-            <label htmlFor="turno" className="block text-sm font-medium leading-6 text-gray-900">
-              Turno
-            </label>
-            <select
+            <SelectInput
               id="turno"
+              label="Turno"
               name="turno"
-              className="mt-2 block w-full rounded-md border-0 bg-white py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              htmlFor="turno"
             >
               <option>Manhã</option>
               <option>Tarde</option>
               <option>Noite</option>
-            </select>
-          </div>
+            </SelectInput>
+          </FormInputArea>
+
           <ButtonArea>
             <SubmitButton>
               Cadastrar
@@ -57,6 +58,7 @@ export default function TeachersPage() {
         </Form>
 
       </ContentContainer>
+
     </Container>
   )
 }
