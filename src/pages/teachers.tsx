@@ -6,9 +6,19 @@ import { FormInputArea } from "@/components/FormInputArea";
 import { InputText } from "@/components/InputText";
 import { SelectInput } from "@/components/SelectInput";
 import { SubmitButton } from "@/components/SubmitButton";
+import { Table } from "@/components/Table";
+import { TableBody } from "@/components/Table/TableBody";
+import { TableHead } from "@/components/Table/TableHead";
+import { TableRow } from "@/components/Table/TableRow";
+import { Td } from "@/components/Table/Td";
+import { Th } from "@/components/Table/Th";
 import { Title } from "@/components/Title";
+import { TeachersContext } from "@/context/teachers/teacherContext";
+import { useContext } from "react";
 
 export default function TeachersPage() {
+  const { isTableShown } = useContext(TeachersContext)
+
   return (
     <Container>
       <Title text="Professores" />
@@ -58,6 +68,27 @@ export default function TeachersPage() {
         </Form>
 
       </ContentContainer>
+
+      {isTableShown && (
+        <Table>
+          <TableHead>
+            <TableRow>
+              <Th>Nome</Th>
+              <Th>Registro</Th>
+              <Th>CPF</Th>
+              <Th>Turno</Th>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <Td>Professor 01</Td>
+              <Td>123456</Td>
+              <Td>123456789-10</Td>
+              <Td>Manhã</Td>
+            </TableRow>
+          </TableBody>
+        </Table>
+      )}
 
     </Container>
   )

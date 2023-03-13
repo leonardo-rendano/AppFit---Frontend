@@ -4,7 +4,7 @@ import { TeachersContextProps, TeachersContextProviderProps } from "./types";
 export const TeachersContext = createContext({} as TeachersContextProps)
 
 export default function TeachersContextProvider({ children }: TeachersContextProviderProps) {
-  const [isTableShown, setIsTableShown] = useState(false)
+  const [isTableShown, setIsTableShown] = useState(true)
   const [data, setData] = useState([])
 
   return (
