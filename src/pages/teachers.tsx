@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { ButtonArea } from "@/components/ButtonArea";
 import { Container } from "@/components/Container";
 import { ContentContainer } from "@/components/ContentContainer";
@@ -14,7 +15,6 @@ import { Td } from "@/components/Table/Td";
 import { Th } from "@/components/Table/Th";
 import { Title } from "@/components/Title";
 import { TeachersContext } from "@/context/teachers/teacherContext";
-import { useContext } from "react";
 
 export default function TeachersPage() {
   const { isTableShown } = useContext(TeachersContext)
