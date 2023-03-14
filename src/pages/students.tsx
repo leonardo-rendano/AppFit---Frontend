@@ -1,3 +1,5 @@
+import { Api } from "@/service/api";
+import { useContext } from "react";
 import { ButtonArea } from "@/components/ButtonArea";
 import { Container } from "@/components/Container";
 import { ContentContainer } from "@/components/ContentContainer";
@@ -14,9 +16,7 @@ import { Th } from "@/components/Table/Th";
 import { Title } from "@/components/Title";
 import { StudentsContext } from "@/context/students";
 import { StudentsList } from "@/context/students/types";
-import { Api } from "@/service/api";
-import { responseEncoding } from "axios";
-import { useContext } from "react";
+import { BiEdit } from 'react-icons/bi'
 
 export default function StudentsPage({ students }: StudentsList) {
   const { isTableShown } = useContext(StudentsContext)
@@ -92,6 +92,7 @@ export default function StudentsPage({ students }: StudentsList) {
               <Th>Endereço</Th>
               <Th>Contato</Th>
               <Th>E-mail</Th>
+              <Th>Editar</Th>
             </TableRow>
           </TableHead>
 
@@ -106,6 +107,11 @@ export default function StudentsPage({ students }: StudentsList) {
                   <Td>{student.address}</Td>
                   <Td>{student.contact}</Td>
                   <Td>{student.email}</Td>
+                  <Td>
+                    <button className="cursor-pointer">
+                      <BiEdit size={20}/>
+                    </button>
+                  </Td>
                 </TableRow>
               )
             })}

@@ -17,6 +17,7 @@ import { Td } from "@/components/Table/Td";
 import { Th } from "@/components/Table/Th";
 import { Title } from "@/components/Title";
 import { TeachersContext } from "@/context/teachers/teacherContext";
+import { BiEdit } from "react-icons/bi";
 
 export default function TeachersPage({ teachers }: TeachersList) {
   const { isTableShown } = useContext(TeachersContext)
@@ -76,6 +77,7 @@ export default function TeachersPage({ teachers }: TeachersList) {
               <Th>Registro</Th>
               <Th>CPF</Th>
               <Th>Turno</Th>
+              <Th>Editar</Th>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -86,6 +88,11 @@ export default function TeachersPage({ teachers }: TeachersList) {
                   <Td>{teacher.register}</Td>
                   <Td>{teacher.cpf}</Td>
                   <Td>{teacher.turn}</Td>
+                  <Td>
+                    <button className="cursor-pointer">
+                      <BiEdit size={20}/>
+                    </button>
+                  </Td>
                 </TableRow>
               )
             })}
