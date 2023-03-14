@@ -15,9 +15,12 @@ import { Td } from "@/components/Table/Td";
 import { Th } from "@/components/Table/Th";
 import { Title } from "@/components/Title";
 import { TeachersContext } from "@/context/teachers/teacherContext";
+import { useEffect } from "react";
+import { Api } from "@/service/api";
 
-export default function TeachersPage() {
+export default function TeachersPage({ teachers }) {
   const { isTableShown } = useContext(TeachersContext)
+
 
   return (
     <Container>
@@ -80,16 +83,30 @@ export default function TeachersPage() {
             </TableRow>
           </TableHead>
           <TableBody>
-            <TableRow>
-              <Td>Professor 01</Td>
-              <Td>123456</Td>
-              <Td>123456789-10</Td>
-              <Td>Manhã</Td>
-            </TableRow>
+            {teachers.map(teacher => {
+              return (
+                <TableRow key={teacher.id}>
+                  <Td>{teacher.name}</Td>
+                  <Td>{teacher.register}</Td>
+                  <Td>{teacher.cpf}</Td>
+                  <Td>{teacher.turn}</Td>
+                </TableRow>
+              )
+            })}
           </TableBody>
         </Table>
       )}
 
     </Container>
   )
+}
+
+export const getServerSideProps = async () => {
+  const response = await Api.get('/teacher')
+
+  return {
+    props: {
+      teachers: response.data
+    }
+  }
 }
