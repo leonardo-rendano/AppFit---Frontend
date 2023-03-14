@@ -9,7 +9,7 @@ export interface TeacherProps {
 }
 
 export interface TeachersList {
-  map(arg0: (teacher: any) => JSX.Element): ReactNode;
+  map(arg0: (teacher: TeacherProps) => JSX.Element): ReactNode;
   teachers: TeacherProps[]
 }
 

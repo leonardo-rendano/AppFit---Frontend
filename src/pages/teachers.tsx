@@ -15,12 +15,11 @@ import { Td } from "@/components/Table/Td";
 import { Th } from "@/components/Table/Th";
 import { Title } from "@/components/Title";
 import { TeachersContext } from "@/context/teachers/teacherContext";
-import { useEffect } from "react";
 import { Api } from "@/service/api";
+import { TeachersList } from "@/context/teachers/types";
 
-export default function TeachersPage({ teachers }) {
+export default function TeachersPage({ teachers }: TeachersList) {
   const { isTableShown } = useContext(TeachersContext)
-
 
   return (
     <Container>
@@ -102,7 +101,7 @@ export default function TeachersPage({ teachers }) {
 }
 
 export const getServerSideProps = async () => {
-  const response = await Api.get('/teacher')
+  const response = await Api.get<TeachersList>('/teacher')
 
   return {
     props: {
