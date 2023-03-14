@@ -5,9 +5,22 @@ import { Form } from "@/components/Form";
 import { FormInputArea } from "@/components/FormInputArea";
 import { InputText } from "@/components/InputText";
 import { SubmitButton } from "@/components/SubmitButton";
+import { Table } from "@/components/Table";
+import { TableBody } from "@/components/Table/TableBody";
+import { TableHead } from "@/components/Table/TableHead";
+import { TableRow } from "@/components/Table/TableRow";
+import { Td } from "@/components/Table/Td";
+import { Th } from "@/components/Table/Th";
 import { Title } from "@/components/Title";
+import { StudentsContext } from "@/context/students";
+import { StudentsList } from "@/context/students/types";
+import { Api } from "@/service/api";
+import { responseEncoding } from "axios";
+import { useContext } from "react";
 
-export default function StudentsPage() {
+export default function StudentsPage({ students }: StudentsList) {
+  const { isTableShown } = useContext(StudentsContext)
+
   return (
     <Container>
       <Title text='Alunos' />
@@ -67,6 +80,48 @@ export default function StudentsPage() {
           </ButtonArea>
         </Form>
       </ContentContainer>
+
+      {isTableShown && (
+        <Table>
+          <TableHead>
+            <TableRow>
+              <Th>Nome</Th>
+              <Th>Objetivo</Th>
+              <Th>RG</Th>
+              <Th>CPF</Th>
+              <Th>Endereço</Th>
+              <Th>Contato</Th>
+              <Th>E-mail</Th>
+            </TableRow>
+          </TableHead>
+
+          <TableBody>
+            {students.map(student => {
+              return (
+                <TableRow key={student.id}>
+                  <Td>{student.name}</Td>
+                  <Td>{student.objective}</Td>
+                  <Td>{student.rg}</Td>
+                  <Td>{student.cpf}</Td>
+                  <Td>{student.address}</Td>
+                  <Td>{student.contact}</Td>
+                  <Td>{student.email}</Td>
+                </TableRow>
+              )
+            })}
+          </TableBody>
+        </Table>
+      )}
     </Container>
   )
+}
+
+export const getServerSideProps = async () => {
+  const response = await Api.get<StudentsList>('/student')
+
+  return {
+    props: {
+      students: response.data
+    }
+  }
 }

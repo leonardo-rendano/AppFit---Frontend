@@ -6,7 +6,7 @@ interface TableProps {
 
 export const Table = ({ children }: TableProps) => {
   return (
-    <table className=" my-6 w-full  border shadow sm:rounded-md">
+    <table className=" my-6 w-full border shadow sm:rounded-md ">
       {children}
     </table>
   )

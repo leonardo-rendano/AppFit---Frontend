@@ -1,4 +1,6 @@
 import { useContext } from "react";
+import { Api } from "@/service/api";
+import { TeachersList } from "@/context/teachers/types";
 import { ButtonArea } from "@/components/ButtonArea";
 import { Container } from "@/components/Container";
 import { ContentContainer } from "@/components/ContentContainer";
@@ -15,8 +17,6 @@ import { Td } from "@/components/Table/Td";
 import { Th } from "@/components/Table/Th";
 import { Title } from "@/components/Title";
 import { TeachersContext } from "@/context/teachers/teacherContext";
-import { Api } from "@/service/api";
-import { TeachersList } from "@/context/teachers/types";
 
 export default function TeachersPage({ teachers }: TeachersList) {
   const { isTableShown } = useContext(TeachersContext)
@@ -34,21 +34,18 @@ export default function TeachersPage({ teachers }: TeachersList) {
               label="Nome"
               htmlFor="nome"
             />
-
             <InputText
               name="registro"
               id="registro"
               label="Registro"
               htmlFor="registro"
             />
-
             <InputText
               name="cpf"
               id="cpf"
               label="CPF"
               htmlFor="cpf"
             />
-
             <SelectInput
               id="turno"
               label="Turno"

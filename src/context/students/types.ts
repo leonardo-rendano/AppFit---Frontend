@@ -1,0 +1,27 @@
+import { Dispatch, ReactNode, SetStateAction } from "react"
+
+export interface StudentsContextProps {
+  isTableShown: boolean,
+  setIsTableShown: Dispatch<SetStateAction<boolean>>
+}
+
+export interface StudentsProviderProps {
+  children: ReactNode
+}
+
+export interface StudentsProps {
+  id: number,
+  name: string,
+  objective: string,
+  rg: number,
+  cpf: number,
+  address: string,
+  contact: number,
+  email: string
+}
+
+export interface StudentsList {
+  students: StudentsProps[]
+  map(arg0: (teacher: StudentsProps) => JSX.Element): ReactNode;
+}
+

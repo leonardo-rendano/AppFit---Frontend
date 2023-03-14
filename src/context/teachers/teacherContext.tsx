@@ -1,7 +1,7 @@
 import { Api } from "@/service/api";
 import { createContext, useState } from "react";
 import { toast } from "react-toastify";
-import { TeachersContextProps, TeachersContextProviderProps, TeachersList } from "./types";
+import { TeachersContextProps, TeachersContextProviderProps } from "./types";
 
 export const TeachersContext = createContext({} as TeachersContextProps)
 
