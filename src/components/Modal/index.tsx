@@ -2,12 +2,9 @@ import Modal  from 'react-modal'
 import React from "react"
 import { useContext } from 'react';
 import { StudentsContext } from '@/context/students';
+import { CustomModalProps } from './types';
 
-interface CustomModalProps {
-  isOpen: boolean
-}
-
-export const CustomModal: React.FC = ({ isOpen }: CustomModalProps) => {
+export const CustomModal: React.FC<CustomModalProps> = ({ isOpen }) => {
   const { isModalVisible } = useContext(StudentsContext)
 
   console.log(isModalVisible)

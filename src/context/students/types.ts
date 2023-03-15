@@ -25,6 +25,7 @@ export interface StudentsProps {
 export interface StudentsList {
   students: StudentsProps[]
   map(arg0: (teacher: StudentsProps) => JSX.Element): ReactNode;
+  isOpen: boolean
 }
 
 export interface ModalItemProps {
