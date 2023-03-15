@@ -18,11 +18,12 @@ import { StudentsContext } from "@/context/students";
 import { StudentsList } from "@/context/students/types";
 import { BiEdit } from 'react-icons/bi'
 import { CustomModal } from "@/components/Modal";
+import { ModalContext } from "@/context/modal";
 
 export default function StudentsPage({ students }: StudentsList) {
-  const { isTableShown, handleOpenCloseModal, isModalVisible } = useContext(StudentsContext)
+  const { isTableShown } = useContext(StudentsContext)
+  const { handleOpenCloseModal, isModalVisible } = useContext(ModalContext)
   
-
   return (
     <Container>
       <Title text='Alunos' />
@@ -112,7 +113,7 @@ export default function StudentsPage({ students }: StudentsList) {
                   <Td>
                     <button
                       className="cursor-pointer"
-                      onClick={handleOpenCloseModal}
+                      onClick={() => handleOpenCloseModal(student.id)}
                     >
                       <BiEdit size={20}/>
                     </button>
@@ -127,6 +128,7 @@ export default function StudentsPage({ students }: StudentsList) {
       {isModalVisible && (
         <CustomModal  
           isOpen={isModalVisible}
+          onRequestClose={handleOpenCloseModal}
         />
       )}
     </Container>
