@@ -25,7 +25,4 @@ export interface StudentsList {
   map(arg0: (teacher: StudentsProps) => JSX.Element): ReactNode;
 }
 
-export interface ModalItemProps {
-  modalItem: StudentsProps
-}
 

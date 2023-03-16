@@ -22,7 +22,8 @@ import { ModalContext } from "@/context/modal";
 
 export default function StudentsPage({ students }: StudentsList) {
   const { isTableShown } = useContext(StudentsContext)
-  const { handleOpenCloseModal, isModalVisible } = useContext(ModalContext)
+  const { handleOpenModal, isModalVisible, modalItems, handleCloseModal } = useContext(ModalContext)
+  
   
   return (
     <Container>
@@ -113,7 +114,7 @@ export default function StudentsPage({ students }: StudentsList) {
                   <Td>
                     <button
                       className="cursor-pointer"
-                      onClick={() => handleOpenCloseModal(student.id)}
+                      onClick={() => handleOpenModal(student.id)}
                     >
                       <BiEdit size={20}/>
                     </button>
@@ -128,7 +129,8 @@ export default function StudentsPage({ students }: StudentsList) {
       {isModalVisible && (
         <CustomModal  
           isOpen={isModalVisible}
-          onRequestClose={handleOpenCloseModal}
+          onRequestClose={handleCloseModal}
+          data={modalItems}
         />
       )}
     </Container>
