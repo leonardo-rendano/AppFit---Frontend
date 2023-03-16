@@ -19,6 +19,7 @@ import { StudentsList } from "@/context/students/types";
 import { BiEdit } from 'react-icons/bi'
 import { CustomModal } from "@/components/Modal";
 import { ModalContext } from "@/context/modal";
+import { ModalStudentContent } from "@/components/ModalStudentContent";
 
 export default function StudentsPage({ students }: StudentsList) {
   const { isTableShown } = useContext(StudentsContext)
@@ -131,7 +132,9 @@ export default function StudentsPage({ students }: StudentsList) {
           isOpen={isModalVisible}
           onRequestClose={handleCloseModal}
           data={modalItems}
-        />
+        >
+          <ModalStudentContent data={modalItems} />
+        </CustomModal>
       )}
     </Container>
   )
