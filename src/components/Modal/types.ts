@@ -3,9 +3,6 @@ import { TeacherProps } from "@/context/teachers/types"
 import { ReactNode } from "react"
 
 export interface CustomModalProps {
-  isOpen: boolean,
-  onRequestClose: () => void
-  data: ModalItemProps,
   children: ReactNode
 }
 

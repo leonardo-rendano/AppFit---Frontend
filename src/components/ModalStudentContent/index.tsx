@@ -1,12 +1,22 @@
-import React from "react"
-import { ButtonArea } from "../ButtonArea"
-import { Form } from "../Form"
+import React, { ChangeEvent, HtmlHTMLAttributes, useState } from "react"
 import { FormInputArea } from "../FormInputArea"
 import { InputText } from "../InputText"
+import { ModalItemProps } from "../Modal/types"
 import { SubmitButton } from "../SubmitButton"
 import { Title } from "../Title"
 
 export const ModalStudentContent = ({ data }) => {
+  const initialValues = {
+    name: data.name,
+    email: data.email,
+    rg: data.rg,
+    cpf: data.cpf,
+    address: data.address,
+    contact: data.contact,
+    objective: data.objective
+  }
+  const [formValues, setFormValues] = useState(initialValues)
+
   return (
     <>
       <Title text="Dados do aluno" />
@@ -17,50 +27,56 @@ export const ModalStudentContent = ({ data }) => {
           id="nome"
           label="Nome"
           htmlFor="nome"
-          value={data.name}
-
+          value={formValues.name}
+          onChange={e => setFormValues({ ...formValues, name: e.target.value })}
         />
         <InputText
           name="email"
           id="email"
           label="E-mail"
           htmlFor="email"
-          value={data.email}
+          value={formValues.email}
+          onChange={e => setFormValues({ ...formValues, email: e.target.value })}
         />
         <InputText
           name="rg"
           id="rg"
           label="RG"
           htmlFor="rg"
-          value={data.rg}
+          value={formValues.rg}
+          onChange={e => setFormValues({ ...formValues, rg: e.target.value })}
         />
         <InputText
           name="cpf"
           id="cpf"
           label="CPF"
           htmlFor="cpf"
-          value={data.cpf}
+          value={formValues.cpf}
+          onChange={e => setFormValues({ ...formValues, cpf: e.target.value })}
         />
         <InputText
           name="endereço"
           id="endereço"
           label="Endereço"
           htmlFor="endereço"
-          value={data.address}
+          value={formValues.address}
+          onChange={e => setFormValues({ ...formValues, address: e.target.value })}
         />
         <InputText
           name="contato"
           id="contato"
           label="Contato"
           htmlFor="contato"
-          value={data.contact}
+          value={formValues.contact}
+          onChange={e => setFormValues({ ...formValues, contact: e.target.value })}
         />
         <InputText
           name="objetivo"
           id="objetivo"
           label="Objetivo"
           htmlFor="objetivo"
-          value={data.objective}
+          value={formValues.objective}
+          onChange={e => setFormValues({ ...formValues, objective: e.target.value })}
         />
 
       </FormInputArea>

@@ -24,15 +24,14 @@ import Head from "next/head";
 
 export default function StudentsPage({ students }: StudentsList) {
   const { isTableShown } = useContext(StudentsContext)
-  const { handleOpenModal, isModalVisible, modalItems, handleCloseModal } = useContext(ModalContext)
-  
+  const { handleOpenModal, isModalVisible, modalItems } = useContext(ModalContext)
   
   return (
     <Container>
       <Head>
         <title>AppFit - Alunos</title>
       </Head>
-      
+
       <Title text='Alunos' />
 
       <ContentContainer>
@@ -133,11 +132,7 @@ export default function StudentsPage({ students }: StudentsList) {
       )}
 
       {isModalVisible && (
-        <CustomModal  
-          isOpen={isModalVisible}
-          onRequestClose={handleCloseModal}
-          data={modalItems}
-        >
+        <CustomModal>
           <ModalStudentContent data={modalItems} />
         </CustomModal>
       )}

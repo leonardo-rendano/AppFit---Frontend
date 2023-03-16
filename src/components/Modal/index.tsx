@@ -1,12 +1,15 @@
 import Modal  from 'react-modal'
-import React from "react"
+import React, { useContext } from "react"
 import { CustomModalProps } from './types';
+import { ModalContext } from '@/context/modal';
 
-export const CustomModal = ({ isOpen, onRequestClose, children }: CustomModalProps) => {
+export const CustomModal = ({  children }: CustomModalProps) => {
+  const { isModalVisible, handleCloseModal } = useContext(ModalContext)
+
   return (
     <Modal
-      isOpen={isOpen}
-      onRequestClose={onRequestClose}
+      isOpen={isModalVisible}
+      onRequestClose={handleCloseModal}
       style={{
         overlay: {
           position: 'fixed',
