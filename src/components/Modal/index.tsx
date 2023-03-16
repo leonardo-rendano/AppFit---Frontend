@@ -23,8 +23,8 @@ export const CustomModal = ({ isOpen, onRequestClose, children }: CustomModalPro
           right: 'auto',
           transform: 'translate(-50%, -50%)',
           backgroundColor: '#fff',
-          width: '70vw',
-          height: '70vh'
+          width: '60vw',
+          height: 'auto'
         }
       }}
     >

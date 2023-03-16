@@ -1,5 +1,5 @@
+import { useContext } from "react";
 import { Api } from "@/service/api";
-import { useContext, useState } from "react";
 import { ButtonArea } from "@/components/ButtonArea";
 import { Container } from "@/components/Container";
 import { ContentContainer } from "@/components/ContentContainer";
@@ -7,12 +7,7 @@ import { Form } from "@/components/Form";
 import { FormInputArea } from "@/components/FormInputArea";
 import { InputText } from "@/components/InputText";
 import { SubmitButton } from "@/components/SubmitButton";
-import { Table } from "@/components/Table";
-import { TableBody } from "@/components/Table/TableBody";
-import { TableHead } from "@/components/Table/TableHead";
-import { TableRow } from "@/components/Table/TableRow";
-import { Td } from "@/components/Table/Td";
-import { Th } from "@/components/Table/Th";
+import { Table,  } from "@/components/Table";
 import { Title } from "@/components/Title";
 import { StudentsContext } from "@/context/students";
 import { StudentsList } from "@/context/students/types";
@@ -20,6 +15,12 @@ import { BiEdit } from 'react-icons/bi'
 import { CustomModal } from "@/components/Modal";
 import { ModalContext } from "@/context/modal";
 import { ModalStudentContent } from "@/components/ModalStudentContent";
+import { TableBody } from "@/components/Table/TableBody";
+import { TableHead } from "@/components/Table/TableHead";
+import { TableRow } from "@/components/Table/TableRow";
+import { Td } from "@/components/Table/Td";
+import { Th } from "@/components/Table/Th";
+import Head from "next/head";
 
 export default function StudentsPage({ students }: StudentsList) {
   const { isTableShown } = useContext(StudentsContext)
@@ -28,6 +29,10 @@ export default function StudentsPage({ students }: StudentsList) {
   
   return (
     <Container>
+      <Head>
+        <title>AppFit - Alunos</title>
+      </Head>
+      
       <Title text='Alunos' />
 
       <ContentContainer>

@@ -18,12 +18,17 @@ import { Th } from "@/components/Table/Th";
 import { Title } from "@/components/Title";
 import { TeachersContext } from "@/context/teachers/teacherContext";
 import { BiEdit } from "react-icons/bi";
+import Head from "next/head";
 
 export default function TeachersPage({ teachers }: TeachersList) {
   const { isTableShown } = useContext(TeachersContext)
 
   return (
     <Container>
+      <Head>
+        <title>AppFit - Professores</title>
+      </Head>
+
       <Title text="Professores" />
 
       <ContentContainer>

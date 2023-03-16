@@ -1,9 +1,17 @@
+import React from "react"
+import { ButtonArea } from "../ButtonArea"
+import { Form } from "../Form"
 import { FormInputArea } from "../FormInputArea"
 import { InputText } from "../InputText"
+import { SubmitButton } from "../SubmitButton"
+import { Title } from "../Title"
 
 export const ModalStudentContent = ({ data }) => {
   return (
-    <FormInputArea>
+    <>
+      <Title text="Dados do aluno" />
+      
+      <FormInputArea>
         <InputText
           name="nome"
           id="nome"
@@ -54,6 +62,16 @@ export const ModalStudentContent = ({ data }) => {
           htmlFor="objetivo"
           value={data.objective}
         />
+
       </FormInputArea>
+      <div className="w-full flex justify-end">
+        <SubmitButton>
+          Editar
+        </SubmitButton>
+
+      </div>
+      
+      
+    </>
   )
 }

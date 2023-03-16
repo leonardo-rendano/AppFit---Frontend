@@ -6,10 +6,15 @@ import { FormInputArea } from "@/components/FormInputArea";
 import { InputText } from "@/components/InputText";
 import { SubmitButton } from "@/components/SubmitButton";
 import { Title } from "@/components/Title";
+import Head from "next/head";
 
 export default function ExercisesPage() {
   return (
     <Container>
+      <Head>
+        <title>AppFit - Exercícios</title>
+      </Head>
+      
       <Title text="Exercícios" />
 
       <ContentContainer>

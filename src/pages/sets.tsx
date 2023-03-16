@@ -7,10 +7,15 @@ import { InputText } from "@/components/InputText";
 import { SelectInput } from "@/components/SelectInput";
 import { SubmitButton } from "@/components/SubmitButton";
 import { Title } from "@/components/Title";
+import Head from "next/head";
 
 export default function SetsPage() {
   return (
     <Container>
+      <Head>
+        <title>AppFit - Séries</title>
+      </Head>
+
       <Title text="Séries" />
 
       <ContentContainer>
