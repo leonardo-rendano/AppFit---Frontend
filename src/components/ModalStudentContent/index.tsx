@@ -1,7 +1,6 @@
 import React, { ChangeEvent, HtmlHTMLAttributes, useState } from "react"
 import { FormInputArea } from "../FormInputArea"
 import { InputText } from "../InputText"
-import { ModalItemProps } from "../Modal/types"
 import { SubmitButton } from "../SubmitButton"
 import { Title } from "../Title"
 
@@ -84,10 +83,7 @@ export const ModalStudentContent = ({ data }) => {
         <SubmitButton>
           Editar
         </SubmitButton>
-
       </div>
-      
-      
     </>
   )
 }

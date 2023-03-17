@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { Api } from "@/service/api";
 import { ButtonArea } from "@/components/ButtonArea";
 import { Container } from "@/components/Container";
@@ -21,11 +21,31 @@ import { TableRow } from "@/components/Table/TableRow";
 import { Td } from "@/components/Table/Td";
 import { Th } from "@/components/Table/Th";
 import Head from "next/head";
+import { toast } from "react-toastify";
 
 export default function StudentsPage({ students }: StudentsList) {
-  const { isTableShown } = useContext(StudentsContext)
+  const initialValues = {
+    name: '',
+    email: '',
+    rg: 0,
+    cpf: 0,
+    address: '',
+    contact: 0,
+    objective: ''
+  }
+
+  const { isTableShown, createNewStudent } = useContext(StudentsContext)
   const { handleOpenModal, isModalVisible, modalItems } = useContext(ModalContext)
   
+  const [newStudent, setNewStudent] = useState(initialValues)
+
+  const handleCreateNewStudent = (e: FormEvent) => {
+    e.preventDefault()
+    createNewStudent(newStudent)
+    toast.success('Aluno cadastrado com sucesso!')
+    setNewStudent(initialValues)
+  }
+
   return (
     <Container>
       <Head>
@@ -35,49 +55,63 @@ export default function StudentsPage({ students }: StudentsList) {
       <Title text='Alunos' />
 
       <ContentContainer>
-        <Form onSubmit={() => { }}>
+        <Form onSubmit={handleCreateNewStudent}>
           <FormInputArea>
             <InputText
               name="nome"
-              id="nome"
+              id="nome" 
               label="Nome"
               htmlFor="nome"
+              value={newStudent.name}
+              onChange={e => setNewStudent({ ...newStudent, name: e.target.value })}
             />
             <InputText
               name="email"
               id="email"
               label="E-mail"
               htmlFor="email"
+              value={newStudent.email}
+              onChange={e => setNewStudent({ ...newStudent, email: e.target.value })}
             />
             <InputText
               name="rg"
               id="rg"
               label="RG"
               htmlFor="rg"
+              value={newStudent.rg}
+              onChange={e => setNewStudent({ ...newStudent, rg: parseInt(e.target.value) })}
             />
             <InputText
               name="cpf"
               id="cpf"
               label="CPF"
               htmlFor="cpf"
+              value={newStudent.cpf}
+              onChange={e => setNewStudent({ ...newStudent, cpf: parseInt(e.target.value) })}
             />
             <InputText
               name="endereço"
               id="endereço"
               label="Endereço"
               htmlFor="endereço"
+              value={newStudent.address}
+              onChange={e => setNewStudent({ ...newStudent, address: e.target.value })}
             />
             <InputText
               name="contato"
               id="contato"
               label="Contato"
               htmlFor="contato"
+              value={newStudent.contact}
+              onChange={e => setNewStudent({ ...newStudent, contact: parseInt(e.target.value) })}
             />
             <InputText
               name="objetivo"
               id="objetivo"
               label="Objetivo"
               htmlFor="objetivo"
+              value={newStudent.objective}
+              onChange={e => setNewStudent({ ...newStudent, objective: e.target.value })}
             />
           </FormInputArea>
 

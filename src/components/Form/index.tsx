@@ -1,8 +1,8 @@
-import { ReactNode } from "react"
+import { FormEvent, ReactNode } from "react"
 
 interface FormProps {
   children: ReactNode,
-  onSubmit: () => void
+  onSubmit: (e: FormEvent) => void
 }
 
 export const Form = ({ children, onSubmit }: FormProps) => {

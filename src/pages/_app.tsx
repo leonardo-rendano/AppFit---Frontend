@@ -12,12 +12,12 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <ToastContainer />
       <TeachersContextProvider>
         <StudentsContextProvider>
           <ModalContextProvider>
             <Header />
             <Component {...pageProps} />
+            <ToastContainer autoClose={3000} theme="colored"  />
           </ModalContextProvider>
         </StudentsContextProvider>
       </TeachersContextProvider>

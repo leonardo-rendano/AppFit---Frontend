@@ -3,6 +3,7 @@ import { Dispatch, ReactNode, SetStateAction } from "react"
 export interface StudentsContextProps {
   isTableShown: boolean,
   setIsTableShown: Dispatch<SetStateAction<boolean>>
+  createNewStudent: (data: StudentsProps) => Promise<void>
 }
 
 export interface StudentsProviderProps {
@@ -10,7 +11,7 @@ export interface StudentsProviderProps {
 }
 
 export interface StudentsProps {
-  id: number,
+  id?: number,
   name: string,
   objective: string,
   rg: number,
@@ -22,7 +23,7 @@ export interface StudentsProps {
 
 export interface StudentsList {
   students: StudentsProps[]
-  map(arg0: (teacher: StudentsProps) => JSX.Element): ReactNode;
+  map(arg0: (student: StudentsProps) => JSX.Element): ReactNode;
 }
 
 
