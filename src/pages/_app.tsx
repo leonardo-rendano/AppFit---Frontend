@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import { StudentsContextProvider } from '@/context/students';
 import Modal from 'react-modal'
 import ModalContextProvider from '@/context/modal';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function App({ Component, pageProps }: AppProps) {
   Modal.setAppElement('#__next')
@@ -17,7 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <ModalContextProvider>
             <Header />
             <Component {...pageProps} />
-            <ToastContainer autoClose={3000} theme="colored"  />
+            <ToastContainer autoClose={3000} theme="colored" position="top-right" />
           </ModalContextProvider>
         </StudentsContextProvider>
       </TeachersContextProvider>
