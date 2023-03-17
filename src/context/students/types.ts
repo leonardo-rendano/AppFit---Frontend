@@ -4,6 +4,7 @@ export interface StudentsContextProps {
   isTableShown: boolean,
   setIsTableShown: Dispatch<SetStateAction<boolean>>
   createNewStudent: (data: StudentsProps) => Promise<void>
+
 }
 
 export interface StudentsProviderProps {

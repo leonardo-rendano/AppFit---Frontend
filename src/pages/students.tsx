@@ -1,4 +1,4 @@
-import { FormEvent, useContext, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 import { Api } from "@/service/api";
 import { ButtonArea } from "@/components/ButtonArea";
 import { Container } from "@/components/Container";
@@ -36,15 +36,22 @@ export default function StudentsPage({ students }: StudentsList) {
 
   const { isTableShown, createNewStudent } = useContext(StudentsContext)
   const { handleOpenModal, isModalVisible, modalItems } = useContext(ModalContext)
-  
   const [newStudent, setNewStudent] = useState(initialValues)
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setNewStudent({ ...newStudent, [e.target.name]: e.target.value })
+  }
 
   const handleCreateNewStudent = (e: FormEvent) => {
     e.preventDefault()
     createNewStudent(newStudent)
+
     toast.success('Aluno cadastrado com sucesso!')
+
     setNewStudent(initialValues)
   }
+
+  console.log(newStudent)
 
   return (
     <Container>
@@ -58,12 +65,12 @@ export default function StudentsPage({ students }: StudentsList) {
         <Form onSubmit={handleCreateNewStudent}>
           <FormInputArea>
             <InputText
-              name="nome"
+              name="name"
               id="nome" 
               label="Nome"
               htmlFor="nome"
               value={newStudent.name}
-              onChange={e => setNewStudent({ ...newStudent, name: e.target.value })}
+              onChange={handleInputChange}
             />
             <InputText
               name="email"
@@ -71,7 +78,7 @@ export default function StudentsPage({ students }: StudentsList) {
               label="E-mail"
               htmlFor="email"
               value={newStudent.email}
-              onChange={e => setNewStudent({ ...newStudent, email: e.target.value })}
+              onChange={handleInputChange}
             />
             <InputText
               name="rg"
@@ -79,7 +86,7 @@ export default function StudentsPage({ students }: StudentsList) {
               label="RG"
               htmlFor="rg"
               value={newStudent.rg}
-              onChange={e => setNewStudent({ ...newStudent, rg: parseInt(e.target.value) })}
+              onChange={handleInputChange}
             />
             <InputText
               name="cpf"
@@ -87,31 +94,31 @@ export default function StudentsPage({ students }: StudentsList) {
               label="CPF"
               htmlFor="cpf"
               value={newStudent.cpf}
-              onChange={e => setNewStudent({ ...newStudent, cpf: parseInt(e.target.value) })}
+              onChange={handleInputChange}
             />
             <InputText
-              name="endereço"
+              name="address"
               id="endereço"
               label="Endereço"
               htmlFor="endereço"
               value={newStudent.address}
-              onChange={e => setNewStudent({ ...newStudent, address: e.target.value })}
+              onChange={handleInputChange}
             />
             <InputText
-              name="contato"
+              name="contact"
               id="contato"
               label="Contato"
               htmlFor="contato"
               value={newStudent.contact}
-              onChange={e => setNewStudent({ ...newStudent, contact: parseInt(e.target.value) })}
+              onChange={handleInputChange}
             />
             <InputText
-              name="objetivo"
+              name="objective"
               id="objetivo"
               label="Objetivo"
               htmlFor="objetivo"
               value={newStudent.objective}
-              onChange={e => setNewStudent({ ...newStudent, objective: e.target.value })}
+              onChange={handleInputChange}
             />
           </FormInputArea>
 
@@ -179,7 +186,7 @@ export const getServerSideProps = async () => {
 
   return {
     props: {
-      students: response.data
+      students: response.data,
     }
   }
 }

@@ -1,6 +1,6 @@
 import { Api } from "@/service/api";
 import { useState, createContext } from "react";
-import { StudentsContextProps, StudentsProps, StudentsProviderProps } from "./types";
+import { StudentsContextProps, StudentsList, StudentsProps, StudentsProviderProps } from "./types";
 
 export const StudentsContext = createContext({} as StudentsContextProps)
 
@@ -26,7 +26,7 @@ export function StudentsContextProvider({ children }: StudentsProviderProps) {
     <StudentsContext.Provider value={{
       isTableShown,
       setIsTableShown,
-      createNewStudent
+      createNewStudent,
     }}>
       {children}
     </StudentsContext.Provider>
