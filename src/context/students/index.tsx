@@ -6,10 +6,9 @@ export const StudentsContext = createContext({} as StudentsContextProps)
 
 export function StudentsContextProvider({ children }: StudentsProviderProps) {
   const [isTableShown, setIsTableShown] = useState(true)
-  const [student, setStudent] = useState({})
 
   const createNewStudent = async (data: StudentsProps) => {
-    const newStudent = await Api.post('/student', {
+    await Api.post('/student', {
       name: data.name,
       email: data.email,
       rg: data.rg,
@@ -18,8 +17,6 @@ export function StudentsContextProvider({ children }: StudentsProviderProps) {
       contact: data.contact,
       objective: data.objective
     })
-
-    setStudent({ ...student, newStudent })
   }
 
   return (

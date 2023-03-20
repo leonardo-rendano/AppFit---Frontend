@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import { Api } from "@/service/api";
 import { ButtonArea } from "@/components/ButtonArea";
 import { Container } from "@/components/Container";
@@ -11,7 +11,7 @@ import { Table,  } from "@/components/Table";
 import { Title } from "@/components/Title";
 import { StudentsContext } from "@/context/students";
 import { StudentsList } from "@/context/students/types";
-import { BiEdit } from 'react-icons/bi'
+import { BiEdit, BiTrash } from 'react-icons/bi'
 import { CustomModal } from "@/components/Modal";
 import { ModalContext } from "@/context/modal";
 import { ModalStudentContent } from "@/components/ModalStudentContent";
@@ -38,20 +38,15 @@ export default function StudentsPage({ students }: StudentsList) {
   const { handleOpenModal, isModalVisible, modalItems } = useContext(ModalContext)
   const [newStudent, setNewStudent] = useState(initialValues)
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setNewStudent({ ...newStudent, [e.target.name]: e.target.value })
-  }
-
-  const handleCreateNewStudent = (e: FormEvent) => {
+  const handleCreateNewStudent = (e: FormEvent) => {    
     e.preventDefault()
+
     createNewStudent(newStudent)
 
     toast.success('Aluno cadastrado com sucesso!')
 
     setNewStudent(initialValues)
   }
-
-  console.log(newStudent)
 
   return (
     <Container>
@@ -70,7 +65,7 @@ export default function StudentsPage({ students }: StudentsList) {
               label="Nome"
               htmlFor="nome"
               value={newStudent.name}
-              onChange={handleInputChange}
+              onChange={e => (setNewStudent({ ...newStudent, name: e.target.value}))}
             />
             <InputText
               name="email"
@@ -78,7 +73,7 @@ export default function StudentsPage({ students }: StudentsList) {
               label="E-mail"
               htmlFor="email"
               value={newStudent.email}
-              onChange={handleInputChange}
+              onChange={e => (setNewStudent({ ...newStudent, email: e.target.value}))}
             />
             <InputText
               name="rg"
@@ -86,7 +81,7 @@ export default function StudentsPage({ students }: StudentsList) {
               label="RG"
               htmlFor="rg"
               value={newStudent.rg}
-              onChange={handleInputChange}
+              onChange={e => (setNewStudent({ ...newStudent, rg: parseInt(e.target.value)}))}
             />
             <InputText
               name="cpf"
@@ -94,7 +89,7 @@ export default function StudentsPage({ students }: StudentsList) {
               label="CPF"
               htmlFor="cpf"
               value={newStudent.cpf}
-              onChange={handleInputChange}
+              onChange={e => (setNewStudent({ ...newStudent, cpf: parseInt(e.target.value)}))}
             />
             <InputText
               name="address"
@@ -102,7 +97,7 @@ export default function StudentsPage({ students }: StudentsList) {
               label="Endereço"
               htmlFor="endereço"
               value={newStudent.address}
-              onChange={handleInputChange}
+              onChange={e => (setNewStudent({ ...newStudent, address: e.target.value}))}
             />
             <InputText
               name="contact"
@@ -110,7 +105,7 @@ export default function StudentsPage({ students }: StudentsList) {
               label="Contato"
               htmlFor="contato"
               value={newStudent.contact}
-              onChange={handleInputChange}
+              onChange={e => (setNewStudent({ ...newStudent, contact: parseInt(e.target.value)}))}
             />
             <InputText
               name="objective"
@@ -118,7 +113,7 @@ export default function StudentsPage({ students }: StudentsList) {
               label="Objetivo"
               htmlFor="objetivo"
               value={newStudent.objective}
-              onChange={handleInputChange}
+              onChange={e => (setNewStudent({ ...newStudent, objective: e.target.value}))}
             />
           </FormInputArea>
 
@@ -142,7 +137,6 @@ export default function StudentsPage({ students }: StudentsList) {
               <Th>Endereço</Th>
               <Th>Contato</Th>
               <Th>E-mail</Th>
-              <Th>Editar</Th>
             </TableRow>
           </TableHead>
 
@@ -163,6 +157,12 @@ export default function StudentsPage({ students }: StudentsList) {
                       onClick={() => handleOpenModal(student.id)}
                     >
                       <BiEdit size={20}/>
+                    </button>
+                    <button
+                      className="cursor-pointer ml-4"
+                      onClick={() => handleOpenModal(student.id)}
+                    >
+                      <BiTrash size={20} color="#ff0000"/>
                     </button>
                   </Td>
                 </TableRow>
