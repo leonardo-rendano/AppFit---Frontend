@@ -1,7 +1,7 @@
 import { Dispatch, ReactNode, SetStateAction } from "react";
 
 export interface TeacherProps {
-  id?: number,
+  id?: string,
   name: string,
   register: number,
   cpf: number,
