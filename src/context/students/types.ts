@@ -4,6 +4,7 @@ export interface StudentsContextProps {
   isTableShown: boolean,
   setIsTableShown: Dispatch<SetStateAction<boolean>>
   createNewStudent: (data: StudentsProps) => Promise<void>
+  deleteStudent: (id: string) => Promise<void>
 }
 
 export interface StudentsProviderProps {
@@ -11,7 +12,7 @@ export interface StudentsProviderProps {
 }
 
 export interface StudentsProps {
-  id?: number,
+  id?: string,
   name: string,
   objective: string,
   rg: number,

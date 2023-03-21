@@ -9,7 +9,7 @@ export default function ModalContextProvider({ children }: ModalContextProviderP
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [modalItems, setModalItems] = useState<ModalItemProps>()
 
-  const handleOpenModal = async (id: number) => {
+  const handleOpenModal = async (id: string) => {
     const studentInfo = await Api.get('/students/:id', {
       params: {
         id: id

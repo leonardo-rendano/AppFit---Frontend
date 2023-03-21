@@ -34,7 +34,7 @@ export default function StudentsPage({ students }: StudentsList) {
     objective: ''
   }
 
-  const { isTableShown, createNewStudent } = useContext(StudentsContext)
+  const { isTableShown, createNewStudent, deleteStudent } = useContext(StudentsContext)
   const { handleOpenModal, isModalVisible, modalItems } = useContext(ModalContext)
   const [newStudent, setNewStudent] = useState(initialValues)
 
@@ -47,6 +47,13 @@ export default function StudentsPage({ students }: StudentsList) {
 
     setNewStudent(initialValues)
   }
+
+  const handleDeleteStudent = (id: string) => {
+    deleteStudent(id)
+    toast.success('Aluno removido com sucesso!')
+  }
+
+
 
   return (
     <Container>
@@ -160,7 +167,7 @@ export default function StudentsPage({ students }: StudentsList) {
                     </button>
                     <button
                       className="cursor-pointer ml-4"
-                      onClick={() => handleOpenModal(student.id)}
+                      onClick={() => handleDeleteStudent(student.id)}
                     >
                       <BiTrash size={20} color="#ff0000"/>
                     </button>

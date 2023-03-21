@@ -3,7 +3,7 @@ import { ReactNode } from "react"
 
 export interface ModalContextProps {
   isModalVisible: boolean,
-  handleOpenModal: (id?: number) => void,
+  handleOpenModal: (id?: string) => void,
   modalItems: ModalItemProps,
   handleCloseModal: () => void
 }

@@ -19,11 +19,20 @@ export function StudentsContextProvider({ children }: StudentsProviderProps) {
     })
   }
 
+  const deleteStudent = async (id: string) => {
+    await Api.delete('/student/:id', {
+      params: {
+        id: id
+      }
+    })
+  }
+
   return (
     <StudentsContext.Provider value={{
       isTableShown,
       setIsTableShown,
       createNewStudent,
+      deleteStudent
     }}>
       {children}
     </StudentsContext.Provider>
