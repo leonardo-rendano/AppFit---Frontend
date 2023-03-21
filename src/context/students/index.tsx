@@ -1,6 +1,6 @@
 import { Api } from "@/service/api";
 import { useState, createContext } from "react";
-import { StudentsContextProps, StudentsList, StudentsProps, StudentsProviderProps } from "./types";
+import { StudentsContextProps, StudentsProps, StudentsProviderProps } from "./types";
 
 export const StudentsContext = createContext({} as StudentsContextProps)
 

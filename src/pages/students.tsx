@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useContext, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { Api } from "@/service/api";
 import { ButtonArea } from "@/components/ButtonArea";
 import { Container } from "@/components/Container";
@@ -23,37 +23,38 @@ import { Th } from "@/components/Table/Th";
 import Head from "next/head";
 import { toast } from "react-toastify";
 
-export default function StudentsPage({ students }: StudentsList) {
-  const initialValues = {
-    name: '',
-    email: '',
-    rg: 0,
-    cpf: 0,
-    address: '',
-    contact: 0,
-    objective: ''
-  }
+const initialValues = {
+  name: '',
+  email: '',
+  rg: 0,
+  cpf: 0,
+  address: '',
+  contact: 0,
+  objective: ''
+}
 
+export default function StudentsPage({ students }: StudentsList) {
   const { isTableShown, createNewStudent, deleteStudent } = useContext(StudentsContext)
   const { handleOpenModal, isModalVisible, modalItems } = useContext(ModalContext)
   const [newStudent, setNewStudent] = useState(initialValues)
+  const [studentsList, setStudentsList] = useState(students || [])
 
   const handleCreateNewStudent = (e: FormEvent) => {    
     e.preventDefault()
-
     createNewStudent(newStudent)
-
-    toast.success('Aluno cadastrado com sucesso!')
-
+    setStudentsList(studentsList => [...studentsList, newStudent])
     setNewStudent(initialValues)
+    toast.success('Aluno cadastrado com sucesso!')
   }
 
   const handleDeleteStudent = (id: string) => {
     deleteStudent(id)
+    let updatedStudentList = studentsList.filter(student => {
+      return (student.id !== id)
+    })
+    setStudentsList(updatedStudentList)
     toast.success('Aluno removido com sucesso!')
   }
-
-
 
   return (
     <Container>
@@ -148,7 +149,7 @@ export default function StudentsPage({ students }: StudentsList) {
           </TableHead>
 
           <TableBody>
-            {students.map(student => {
+            {studentsList?.map(student => {
               return (
                 <TableRow key={student.id}>
                   <Td>{student.name}</Td>
@@ -169,7 +170,7 @@ export default function StudentsPage({ students }: StudentsList) {
                       className="cursor-pointer ml-4"
                       onClick={() => handleDeleteStudent(student.id)}
                     >
-                      <BiTrash size={20} color="#ff0000"/>
+                      <BiTrash size={20} color="#d90808"/>
                     </button>
                   </Td>
                 </TableRow>
