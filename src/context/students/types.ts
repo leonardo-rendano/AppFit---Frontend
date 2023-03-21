@@ -5,6 +5,7 @@ export interface StudentsContextProps {
   setIsTableShown: Dispatch<SetStateAction<boolean>>
   createNewStudent: (data: StudentsProps) => Promise<void>
   deleteStudent: (id: string) => Promise<void>
+  updateStudent: (data: StudentsProps) => Promise<void>
 }
 
 export interface StudentsProviderProps {
