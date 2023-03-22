@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { ChangeEvent, FormEvent, HtmlHTMLAttributes, useContext, useState } from "react";
 import { Api } from "@/service/api";
 import { TeachersList } from "@/context/teachers/types";
 import { ButtonArea } from "@/components/ButtonArea";
@@ -17,11 +17,43 @@ import { Td } from "@/components/Table/Td";
 import { Th } from "@/components/Table/Th";
 import { Title } from "@/components/Title";
 import { TeachersContext } from "@/context/teachers/teacherContext";
-import { BiEdit } from "react-icons/bi";
+import { BiEdit, BiTrash } from "react-icons/bi";
 import Head from "next/head";
+import { toast } from "react-toastify";
+
+const initialValues = {
+  name: '',
+  register: 0,
+  cpf: 0,
+  turn: ''
+}
 
 export default function TeachersPage({ teachers }: TeachersList) {
-  const { isTableShown } = useContext(TeachersContext)
+  const { isTableShown, createNewTeacher } = useContext(TeachersContext)
+  const [teachersList, setTeachersList] = useState(teachers || [])
+  const [newTeacher, setNewTeacher] = useState(initialValues)
+
+  const turnOptions = [
+    { value: 'Manhã', text: 'Manhã' },
+    { value: 'Tarde', text: 'Tarde' },
+    { value: 'Noite', text: 'Noite' }
+  ]
+
+  const [turnSelected, setTurnSelected] = useState(turnOptions[0].value)
+
+  const handleTurnSelect = (e: ChangeEvent<HTMLSelectElement>) => {
+    setTurnSelected(e.target.value)
+  }
+
+  const handleCreateNewTeacher = (e: FormEvent) => {
+    e.preventDefault()
+    createNewTeacher(newTeacher)
+    setTeachersList(teachersList => [...teachersList, newTeacher])
+    setNewTeacher(initialValues)
+    toast.success('Professor cadastrado com sucesso!')
+  }
+
+  console.log(newTeacher.turn)
 
   return (
     <Container>
@@ -32,35 +64,49 @@ export default function TeachersPage({ teachers }: TeachersList) {
       <Title text="Professores" />
 
       <ContentContainer>
-        <Form onSubmit={() => {}}>
+        <Form onSubmit={handleCreateNewTeacher}>
           <FormInputArea>
             <InputText
-              name="nome"
+              name="name"
               id="nome"
               label="Nome"
               htmlFor="nome"
+              value={newTeacher.name}
+              onChange={e => setNewTeacher({ ...newTeacher, name: e.target.value })}
             />
             <InputText
-              name="registro"
+              name="register"
               id="registro"
               label="Registro"
               htmlFor="registro"
+              value={newTeacher.register}
+              onChange={e => setNewTeacher({ ...newTeacher, register: parseInt(e.target.value) })}
             />
             <InputText
               name="cpf"
               id="cpf"
               label="CPF"
               htmlFor="cpf"
+              value={newTeacher.cpf}
+              onChange={e => setNewTeacher({ ...newTeacher, cpf: parseInt(e.target.value) })}
             />
             <SelectInput
               id="turno"
               label="Turno"
               name="turno"
               htmlFor="turno"
+              value={turnSelected}
+              onChange={handleTurnSelect}
             >
-              <option>Manhã</option>
-              <option>Tarde</option>
-              <option>Noite</option>
+              {turnOptions.map(turn => {
+                return (
+                  <option
+                    key={turn.text}
+                    value={turn.value}
+                  >{turn.text}
+                  </option>
+                )
+              })}
             </SelectInput>
           </FormInputArea>
 
@@ -82,11 +128,11 @@ export default function TeachersPage({ teachers }: TeachersList) {
               <Th>Registro</Th>
               <Th>CPF</Th>
               <Th>Turno</Th>
-              <Th>Editar</Th>
+              <Th>Opções</Th>
             </TableRow>
           </TableHead>
           <TableBody>
-            {teachers.map(teacher => {
+            {teachersList.map(teacher => {
               return (
                 <TableRow key={teacher.id}>
                   <Td>{teacher.name}</Td>
@@ -94,8 +140,17 @@ export default function TeachersPage({ teachers }: TeachersList) {
                   <Td>{teacher.cpf}</Td>
                   <Td>{teacher.turn}</Td>
                   <Td>
-                    <button className="cursor-pointer">
+                    <button 
+                      className="cursor-pointer"
+                      onClick={() => {}}
+                    >
                       <BiEdit size={20}/>
+                    </button>
+                    <button
+                      className="cursor-pointer ml-4"
+                      onClick={() => {}}
+                    >
+                      <BiTrash size={20} color="#d90808"/>
                     </button>
                   </Td>
                 </TableRow>

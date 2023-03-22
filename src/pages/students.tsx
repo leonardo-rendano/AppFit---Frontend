@@ -145,6 +145,7 @@ export default function StudentsPage({ students }: StudentsList) {
               <Th>Endereço</Th>
               <Th>Contato</Th>
               <Th>E-mail</Th>
+              <Th>Opções</Th>
             </TableRow>
           </TableHead>
 
