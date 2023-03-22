@@ -32,18 +32,11 @@ export default function TeachersPage({ teachers }: TeachersList) {
   const { isTableShown, createNewTeacher } = useContext(TeachersContext)
   const [teachersList, setTeachersList] = useState(teachers || [])
   const [newTeacher, setNewTeacher] = useState(initialValues)
-
   const turnOptions = [
     { value: 'Manhã', text: 'Manhã' },
     { value: 'Tarde', text: 'Tarde' },
     { value: 'Noite', text: 'Noite' }
   ]
-
-  const [turnSelected, setTurnSelected] = useState(turnOptions[0].value)
-
-  const handleTurnSelect = (e: ChangeEvent<HTMLSelectElement>) => {
-    setTurnSelected(e.target.value)
-  }
 
   const handleCreateNewTeacher = (e: FormEvent) => {
     e.preventDefault()
@@ -52,8 +45,6 @@ export default function TeachersPage({ teachers }: TeachersList) {
     setNewTeacher(initialValues)
     toast.success('Professor cadastrado com sucesso!')
   }
-
-  console.log(newTeacher.turn)
 
   return (
     <Container>
@@ -95,8 +86,8 @@ export default function TeachersPage({ teachers }: TeachersList) {
               label="Turno"
               name="turno"
               htmlFor="turno"
-              value={turnSelected}
-              onChange={handleTurnSelect}
+              value={newTeacher.turn}
+              onChange={e => setNewTeacher({ ...newTeacher, turn: e.target.value })}
             >
               {turnOptions.map(turn => {
                 return (
