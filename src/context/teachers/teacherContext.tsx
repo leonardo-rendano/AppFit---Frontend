@@ -17,11 +17,20 @@ export default function TeachersContextProvider({ children }: TeachersContextPro
     })
   }
 
+  async function removeTeacher(teacher_id: string) {
+    await Api.delete('/teacher/:id', {
+      params: {
+        teacher_id: teacher_id
+      }
+    })
+  }
+
   return (
     <TeachersContext.Provider value={{
       isTableShown,
       setIsTableShown,
-      createNewTeacher
+      createNewTeacher,
+      removeTeacher
     }}>
       {children}
     </TeachersContext.Provider>

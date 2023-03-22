@@ -32,7 +32,6 @@ export function StudentsContextProvider({ children }: StudentsProviderProps) {
     })
   }
   
-
   async function deleteStudent(id: string) {
     await Api.delete('/student/:id', {
       params: {

@@ -29,7 +29,7 @@ const initialValues = {
 }
 
 export default function TeachersPage({ teachers }: TeachersList) {
-  const { isTableShown, createNewTeacher } = useContext(TeachersContext)
+  const { isTableShown, createNewTeacher, removeTeacher } = useContext(TeachersContext)
   const [teachersList, setTeachersList] = useState(teachers || [])
   const [newTeacher, setNewTeacher] = useState(initialValues)
   const turnOptions = [
@@ -44,6 +44,15 @@ export default function TeachersPage({ teachers }: TeachersList) {
     setTeachersList(teachersList => [...teachersList, newTeacher])
     setNewTeacher(initialValues)
     toast.success('Professor cadastrado com sucesso!')
+  }
+
+  const handleRemoveTeacher = (teacher_id: string) => {
+    removeTeacher(teacher_id)
+    let updatedTeachersList = teachersList.filter(teacher => {
+      return (teacher.id !== teacher_id)
+    })
+    setTeachersList(updatedTeachersList)
+    toast.success('Professor removido com sucesso!')
   }
 
   return (
@@ -93,7 +102,6 @@ export default function TeachersPage({ teachers }: TeachersList) {
                 return (
                   <option
                     key={turn.text}
-                    value={turn.value}
                   >{turn.text}
                   </option>
                 )
@@ -139,7 +147,7 @@ export default function TeachersPage({ teachers }: TeachersList) {
                     </button>
                     <button
                       className="cursor-pointer ml-4"
-                      onClick={() => {}}
+                      onClick={() => handleRemoveTeacher(teacher.id)}
                     >
                       <BiTrash size={20} color="#d90808"/>
                     </button>
