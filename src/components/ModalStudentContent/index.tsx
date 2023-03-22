@@ -1,7 +1,6 @@
 import { ModalContext } from "@/context/modal"
 import { StudentsContext } from "@/context/students"
-import { StudentsProps } from "@/context/students/types"
-import React, { ChangeEvent, FormEvent, HtmlHTMLAttributes, useContext, useState } from "react"
+import React, { FormEvent, useContext, useState } from "react"
 import { toast } from "react-toastify"
 import { ButtonArea } from "../ButtonArea"
 import { Form } from "../Form"

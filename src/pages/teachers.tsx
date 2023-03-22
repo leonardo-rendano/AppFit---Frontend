@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, HtmlHTMLAttributes, useContext, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { Api } from "@/service/api";
 import { TeachersList } from "@/context/teachers/types";
 import { ButtonArea } from "@/components/ButtonArea";
@@ -20,6 +20,9 @@ import { TeachersContext } from "@/context/teachers/teacherContext";
 import { BiEdit, BiTrash } from "react-icons/bi";
 import Head from "next/head";
 import { toast } from "react-toastify";
+import { ModalContext } from "@/context/modal";
+import { CustomModal } from "@/components/Modal";
+import { ModalTeacherContent } from "@/components/ModalTeachersContent";
 
 const initialValues = {
   name: '',
@@ -30,6 +33,7 @@ const initialValues = {
 
 export default function TeachersPage({ teachers }: TeachersList) {
   const { isTableShown, createNewTeacher, removeTeacher } = useContext(TeachersContext)
+  const { openTeacherModal, isModalVisible, modalItems } = useContext(ModalContext)
   const [teachersList, setTeachersList] = useState(teachers || [])
   const [newTeacher, setNewTeacher] = useState(initialValues)
   const turnOptions = [
@@ -53,6 +57,10 @@ export default function TeachersPage({ teachers }: TeachersList) {
     })
     setTeachersList(updatedTeachersList)
     toast.success('Professor removido com sucesso!')
+  }
+
+  const handleOpenTeacherModal = (id: string) => {
+    openTeacherModal(id)
   }
 
   return (
@@ -141,7 +149,7 @@ export default function TeachersPage({ teachers }: TeachersList) {
                   <Td>
                     <button 
                       className="cursor-pointer"
-                      onClick={() => {}}
+                      onClick={() => handleOpenTeacherModal(teacher.id)}
                     >
                       <BiEdit size={20}/>
                     </button>
@@ -157,6 +165,12 @@ export default function TeachersPage({ teachers }: TeachersList) {
             })}
           </TableBody>
         </Table>
+      )}
+
+      {isModalVisible && (
+        <CustomModal>
+          <ModalTeacherContent data={modalItems} />
+        </CustomModal>
       )}
 
     </Container>

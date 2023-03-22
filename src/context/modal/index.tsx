@@ -20,6 +20,17 @@ export default function ModalContextProvider({ children }: ModalContextProviderP
     setIsModalVisible(true)
   }
 
+  const openTeacherModal = async (id: string) => {
+    const teacherInfo = await Api.get('/teacher/:id', {
+      params: {
+        id: id
+      }
+    })
+
+    setModalItems(teacherInfo.data)
+    setIsModalVisible(true)
+  }
+
   const handleCloseModal = () => {
     setIsModalVisible(false)
   }
@@ -29,7 +40,8 @@ export default function ModalContextProvider({ children }: ModalContextProviderP
       isModalVisible,
       handleOpenModal,
       modalItems,
-      handleCloseModal
+      handleCloseModal,
+      openTeacherModal
     }}>
       {children}
     </ModalContext.Provider>
