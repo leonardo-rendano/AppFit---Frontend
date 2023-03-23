@@ -6,13 +6,5 @@ export const menuItems = [
   {
     href: '/students',
     children: 'Alunos'
-  },
-  {
-    href: '/sets',
-    children: 'Séries'
-  },
-  {
-    href: '/exercises',
-    children: 'Exercícios'
   }
 ]

@@ -3,7 +3,7 @@ import { menuItems } from "./menuItems"
 
 export const NavigationMenu = () => {
   return (
-    <nav className="w-1/3">
+    <nav className="w-1/6">
       <ul className="flex items-center justify-between font-medium">
         {menuItems.map(item => {
           return (
