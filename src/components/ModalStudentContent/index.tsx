@@ -95,6 +95,7 @@ export const ModalStudentContent = ({ data }) => {
           />
 
         </FormInputArea>
+        
         <ButtonArea>
           <SubmitButton>
             Editar

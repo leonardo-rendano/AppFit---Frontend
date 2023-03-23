@@ -24,12 +24,23 @@ export default function TeachersContextProvider({ children }: TeachersContextPro
     })
   }
 
+  async function updateTeacher(data: TeacherProps) {
+    await Api.patch('/teacher', {
+      id: data.id,
+      name: data.name,
+      register: data.register,
+      cpf: data.cpf,
+      turn: data.turn
+    })
+  }
+
   return (
     <TeachersContext.Provider value={{
       isTableShown,
       setIsTableShown,
       createNewTeacher,
-      removeTeacher
+      removeTeacher,
+      updateTeacher
     }}>
       {children}
     </TeachersContext.Provider>

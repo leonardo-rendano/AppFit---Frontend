@@ -1,4 +1,7 @@
-import { useState } from "react"
+import { ModalContext } from "@/context/modal"
+import { TeachersContext } from "@/context/teachers/teacherContext"
+import { FormEvent, useContext, useState } from "react"
+import { toast } from "react-toastify"
 import { ButtonArea } from "../ButtonArea"
 import { Form } from "../Form"
 import { FormInputArea } from "../FormInputArea"
@@ -15,15 +18,24 @@ export const ModalTeacherContent = ({ data }) => {
     turn: data.turn
   }
 
+  const { updateTeacher } = useContext(TeachersContext)
+  const { handleCloseModal } = useContext(ModalContext)
   const [formValues, setFormValues] = useState(initialValues)
 
   console.log(formValues)
+
+  const handleEditTeacher = (e: FormEvent) => {
+    e.preventDefault()
+    updateTeacher(formValues)
+    toast.success('Dados do professor atualizados!')
+    handleCloseModal()
+  }
 
   return (
     <>
       <Title text="Dados do professor" />
 
-      <Form onSubmit={() => {}}>
+      <Form onSubmit={handleEditTeacher}>
         <FormInputArea>
           <InputText 
             name="name"
@@ -39,7 +51,7 @@ export const ModalTeacherContent = ({ data }) => {
             label="Registro"
             htmlFor="register"
             value={formValues.register}
-            onChange={e => setFormValues({ ...formValues, register: e.target.value })}
+            onChange={e => setFormValues({ ...formValues, register: parseInt(e.target.value) })}
           />
           <InputText 
             name="cpf"
@@ -47,7 +59,7 @@ export const ModalTeacherContent = ({ data }) => {
             label="CPF"
             htmlFor="cpf"
             value={formValues.cpf}
-            onChange={e => setFormValues({ ...formValues, cpf: e.target.value })}
+            onChange={e => setFormValues({ ...formValues, cpf: parseInt(e.target.value) })}
           />
           <InputText 
             name="turn"

@@ -18,6 +18,7 @@ export interface TeachersContextProps {
   setIsTableShown: Dispatch<SetStateAction<boolean>>
   createNewTeacher: (data: TeacherProps) => Promise<void>
   removeTeacher: (teacher_id: string) => Promise<void>
+  updateTeacher: (data: TeacherProps) => Promise<void>
  }
 
 export interface TeachersContextProviderProps {
