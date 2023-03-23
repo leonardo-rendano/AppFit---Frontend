@@ -17,12 +17,9 @@ export const ModalTeacherContent = ({ data }) => {
     cpf: data.cpf,
     turn: data.turn
   }
-
   const { updateTeacher } = useContext(TeachersContext)
   const { handleCloseModal } = useContext(ModalContext)
   const [formValues, setFormValues] = useState(initialValues)
-
-  console.log(formValues)
 
   const handleEditTeacher = (e: FormEvent) => {
     e.preventDefault()
